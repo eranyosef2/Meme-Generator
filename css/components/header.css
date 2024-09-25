@@ -1,0 +1,47 @@
+header {
+    background: linear-gradient(90deg, #00a8ff, #00dbff);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; 
+    z-index: 1000; 
+  }
+  
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+  
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #00dbff;
+    border-radius: 20px;
+  }
+  
+  nav a:hover {
+    background-color: #009acd; 
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  #about {
+    padding: 40px; 
+    background-color: #333;
+    color: white;
+    margin-top: 60px; 
+    border-radius: 10px;
+  }

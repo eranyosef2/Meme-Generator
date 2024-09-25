@@ -3,31 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meme Generator</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href='css/main.css'>
+  <title>myMeme Generator</title>
 </head>
-<body>
-  <header>
-    <div class="logo">LOGO</div>
-    <nav>
-      <ul>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-  <section class="gallery" id="gallerySection">
-    <h2>Gallery Section</h2>
-
-  </section>
-
-  <section class="editor" id="editorSection">
-    <h2>Editor Section</h2>
-    <canvas id="memeCanvas" width="450" height="450"></canvas>
-  </section>
-
-  <script src="meme-controller.js"></script> 
-</body>
-</html>
+<body onload="init()">
+    <header>
+      <div class="logo">LOGO</div>
+      <nav>
+        <a href="#" onclick="showGallery()">Gallery</a>
+        <a href="#" onclick="showAbout()">About</a> <!-- About Tab -->
+      </nav>
+    </header>
+  
+    <main>
+      <!-- Gallery Section -->
+      <section id="gallery">
+        <div id="img-gallery"></div>
+      </section>
+  
+      <!-- Editor Section -->
+      <section id="editor" style="display: none;">
+        <canvas id="meme-canvas" width="450" height="450"></canvas>
+      </section>
+  
+      <!-- About Section -->
+      <section id="about" style="display: none;">
+        <h2>About This Meme Generator</h2>
+        <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start editing!</p>
+      </section>
+    </main>
+  
+    <script src="js/gallery-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+  </body>
+  </html>
