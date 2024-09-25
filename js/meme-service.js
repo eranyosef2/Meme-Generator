@@ -1,6 +1,8 @@
 'use strict'
 
+var gCurrColor = '#000000'
 var gImgs = []
+
 for (let i = 1; i <= 18; i++) {
     gImgs.push({ id: i, url: `img/${i}.jpg`, keywords: ['funny', 'random'] })
   }
@@ -12,14 +14,14 @@ for (let i = 1; i <= 18; i++) {
       {
         txt: 'Enter meme Text', 
         size: 20,
-        color: 'color',
+        color:'#000000',
         x: 150, 
         y: 50  
       },
       {
         txt: 'Enter meme Text', 
         size: 20,
-        color: 'color',
+        color:'#ff0000',
         x: 150,
         y: 400 
       }
@@ -52,3 +54,10 @@ for (let i = 1; i <= 18; i++) {
   function setLineColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color 
   }
+  function getNewLineYPosition() {
+    const canvas = document.getElementById('meme-canvas')
+    const lineCount = gMeme.lines.length
+    const lineHeight = 50
+    return canvas.height / 2 + lineCount * lineHeight
+  }
+

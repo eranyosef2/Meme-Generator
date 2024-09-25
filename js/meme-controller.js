@@ -1,10 +1,11 @@
 'use strict'
 
 var ctx
-var gElCanvas = document.getElementById('meme-canvas')
+var gElCanvas
 var gCurrColor = '#000000'  // Default color
 
 function onInit() {
+  gElCanvas = document.getElementById('meme-canvas')  // Initialize canvas here
   renderGallery()
 }
 
@@ -23,15 +24,14 @@ function onImgSelect(imgId) {
 }
 
 function renderMeme() {
-  const canvas = document.getElementById('meme-canvas')
-  const ctx = canvas.getContext('2d')
+  const ctx = gElCanvas.getContext('2d')
   const img = new Image()
   const selectedImg = getSelectedImg()
 
   img.src = selectedImg.url
   img.onload = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+    ctx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 
     const meme = getMeme()
     meme.lines.forEach((line, idx) => {
@@ -93,6 +93,10 @@ function onSetColor(ev) {
   renderMeme()
 }
 
+function setLineColor(newColor) {
+  gMeme.lines[gMeme.selectedLineIdx].color = newColor
+}
+
 function onIncreaseFont() {
   changeFontSize(2)
 }
@@ -141,4 +145,7 @@ function updateTextInput() {
   const textInput = document.getElementById('text-input')
   textInput.value = selectedLine.txt === 'Enter Meme Text' ? '' : selectedLine.txt
   textInput.placeholder = 'Enter Meme Text'
+
+  const colorInput = document.getElementById('color')
+  colorInput.value = selectedLine.color
 }
