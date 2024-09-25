@@ -1,0 +1,39 @@
+@media screen and (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    nav a {
+      font-size: 1rem; 
+      padding: 8px 15px;
+    }
+  
+  
+    canvas {
+      width: 100%;
+      height: auto; 
+    }
+  
+  
+    #img-gallery img {
+      width: 80px; 
+      height: auto;
+    }
+  
+ 
+    #text-input {
+      width: 100%; 
+      font-size: 1rem;
+    }
+  
+    .gallery {
+      padding: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .gallery, #about, .editor {
+      padding: 10px; 
+    }
+  }

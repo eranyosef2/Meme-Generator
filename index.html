@@ -6,7 +6,7 @@
   <link rel="stylesheet" href='css/main.css'>
   <title>myMeme Generator</title>
 </head>
-<body onload="init()">
+<body onload="onInit()">
     <header>
       <div class="logo">LOGO</div>
       <nav>
@@ -24,6 +24,7 @@
       <!-- Editor Section -->
       <section id="editor" style="display: none;">
         <canvas id="meme-canvas" width="450" height="450"></canvas>
+        <input type="text" id="text-input" placeholder="Enter meme text" oninput="onTextInputChange()">
       </section>
   
       <!-- About Section -->
@@ -35,5 +36,7 @@
   
     <script src="js/gallery-service.js"></script>
     <script src="js/gallery-controller.js"></script>
-  </body>
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
   </html>

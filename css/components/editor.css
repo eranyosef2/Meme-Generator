@@ -11,9 +11,17 @@
   canvas {
     border: 2px solid #fff;
     background-color: #fff;
-    width: 450px;
-    height: 450px;
+    width: 100%;
+    max-width : 450px;
+    height: auto;
+    
   }
   #editor {
     display: none;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto; 
   }
+  

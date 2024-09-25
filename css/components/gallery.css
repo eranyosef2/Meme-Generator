@@ -29,12 +29,27 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
   
   #img-gallery img {
-  width: 150px; 
+  width: 100%; 
+  max-width: 150px;
   height: auto; 
   cursor: pointer;
   object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
-  
+
+#img-gallery img:hover {
+    transform: scale(1.05); 
+  }
+
+
+@media screen and (max-width: 768px) {
+    #img-gallery img {
+      width: 80px; 
+    }
+  }
