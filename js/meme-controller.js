@@ -1,5 +1,10 @@
 'use strict'
 
+var ctx
+var fillStyle
+var gElCanvas = document.getElementById('meme-canvas')
+
+
 function onInit() {
 //   console.log('Initializing gallery...')
   renderGallery() 
@@ -68,3 +73,9 @@ function showEditor() {
     setLineTxt(newText) 
     renderMeme() 
   }
+
+  function downloadCanvas(elLink) {
+    const dataUrl = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = dataUrl
+    elLink.download = 'my-img.jpg'
+}

@@ -8,7 +8,7 @@ for (let i = 1; i <= 18; i++) {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
-      { txt: 'I sometimes eat Falafel', size: 20, color: 'red', x: 50, y: 50}
+      { txt: 'Enter Meme Text', size: 20, color: 'yellow', x: 50, y: 50}
     ]
   }
   
