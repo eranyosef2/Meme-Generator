@@ -1,11 +1,12 @@
 'use strict'
 
 var ctx
-var gElCanvas
-var gCurrColor = '#000000'  // Default color
+var gCurrColor = '#000000'
+var gElCanvas 
 
 function onInit() {
-  gElCanvas = document.getElementById('meme-canvas')  // Initialize canvas here
+  gElCanvas = document.getElementById('meme-canvas') 
+  gElCanvas.addEventListener('click', onCanvasClick) 
   renderGallery()
 }
 
@@ -113,9 +114,9 @@ function changeFontSize(diff) {
 
 function onAddLine() {
   const newLine = {
-    txt: 'Enter Meme Text',  // Default text for the new line
+    txt: 'Enter Meme Text', 
     size: 20,
-    color: gCurrColor,  // Use the current selected color
+    color: gCurrColor,  
     x: 50,
     y: getNewLineYPosition()
   }
@@ -126,10 +127,9 @@ function onAddLine() {
 }
 
 function getNewLineYPosition() {
-  const canvas = document.getElementById('meme-canvas')
   const lineCount = gMeme.lines.length
   const lineHeight = 50
-  return canvas.height / 2 + lineCount * lineHeight
+  return gElCanvas.height / 2 + lineCount * lineHeight
 }
 
 function onSwitchLine() {
@@ -148,4 +148,26 @@ function updateTextInput() {
 
   const colorInput = document.getElementById('color')
   colorInput.value = selectedLine.color
+}
+
+function onCanvasClick(ev) {
+  const { offsetX, offsetY } = ev
+  const meme = getMeme()
+  const ctx = gElCanvas.getContext('2d')
+
+  const clickedLine = meme.lines.find(line => {
+    ctx.font = `${line.size}px Arial`
+    const textWidth = ctx.measureText(line.txt).width
+
+    return offsetX >= line.x &&
+           offsetX <= line.x + textWidth &&
+           offsetY >= line.y - line.size &&
+           offsetY <= line.y
+  })
+
+  if (clickedLine) {
+    meme.selectedLineIdx = meme.lines.indexOf(clickedLine)
+    updateTextInput()
+    renderMeme()
+  }
 }
