@@ -1,3 +1,4 @@
+'use strict'
 
 var gImgs = []
 for (let i = 1; i <= 18; i++) {
@@ -8,9 +9,24 @@ for (let i = 1; i <= 18; i++) {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
-      { txt: 'Enter Meme Text', size: 20, color: 'yellow', x: 50, y: 50}
+      {
+        txt: 'Enter meme Text', 
+        size: 20,
+        color: 'color',
+        x: 150, 
+        y: 50  
+      },
+      {
+        txt: 'Enter meme Text', 
+        size: 20,
+        color: 'color',
+        x: 150,
+        y: 400 
+      }
     ]
   }
+ 
+
   
   function getImgs() {
     return gImgs
@@ -31,4 +47,8 @@ for (let i = 1; i <= 18; i++) {
   
   function setLineTxt(newText) {
     gMeme.lines[gMeme.selectedLineIdx].txt = newText
+  }
+
+  function setLineColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color 
   }

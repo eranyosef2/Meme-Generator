@@ -1,0 +1,17 @@
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+button img {
+  width: 30px;
+  height: auto;
+}
+
+label img {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+}

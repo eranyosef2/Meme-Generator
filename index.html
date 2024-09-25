@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href='css/main.css'>
+  <script src="https://kit.fontawesome.com/92c3bd79e1.js" crossorigin="anonymous"></script>
   <title>myMeme Generator</title>
 </head>
 <body onload="onInit()">
@@ -25,7 +26,31 @@
       <section id="editor" style="display: none;">
         <canvas id="meme-canvas" width="450" height="450"></canvas>
         <input type="text" id="text-input" placeholder="Enter meme text" oninput="onTextInputChange()">
-        <a href="#" onclick="downloadCanvas(this)" download >Download</a>
+        <a href="#" onclick="downloadCanvas(this)" download>
+          <i class="fa-solid fa-download" style="font-size: 24px; cursor: pointer;"></i>
+        </a>
+        <label for="color">
+          <img src="img/paint-icon.png" alt="" style="width: 30px;">
+        </label>
+        <input
+        type="color"
+        id="color"
+        name="color"
+        value="#000000"
+        oninput="onSetColor(event)"
+      />
+      <button onclick="onIncreaseFont()">
+      <img src="img/increase-icon.png" alt="" style="width: 30px;">
+    </button>
+      <button onclick="onDecreaseFont()">
+      <img src="img/decrease-icon.png" alt="" style="width: 30px;">
+    </button>
+    <button onclick="onAddLine()">
+      <img src="img/add-icon.png" alt="" style="width: 30px;">
+    </button>
+    <button onclick="onSwitchLine()">
+      <img src="img/switch-icon.png" alt="" style="width: 30px;">
+    </button>
       </section>
   
       <!-- About Section -->
