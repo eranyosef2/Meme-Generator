@@ -78,7 +78,6 @@ function drawLineFrame(ctx, line, xPos) {
   ctx.stroke()
 }
 
-
 function showGallery() {
   document.getElementById('gallery').style.display = 'block'
   document.getElementById('editor-container').style.display = 'none'
@@ -103,7 +102,7 @@ function showAbout() {
 function showSaved() {
   const savedMemes = getSavedMemes()
   const container = document.getElementById('saved-memes-container')
-  container.innerHTML = ''  
+  container.innerHTML = ''
 
   savedMemes.forEach((meme, idx) => {
     const memeImg = document.createElement('img')
@@ -147,10 +146,6 @@ function onSetColor(ev) {
   gCurrColor = ev.target.value
   setLineColor(gCurrColor)
   renderMeme()
-}
-
-function setLineColor(newColor) {
-  gMeme.lines[gMeme.selectedLineIdx].color = newColor
 }
 
 function onIncreaseFont() {
@@ -243,13 +238,13 @@ function onSetFontFamily(font) {
 }
 
 function onMoveLineUp() {
-  const line = getMeme().lines[getMeme().selectedLineIdx]
+  const line = getMeme().lines[gMeme.selectedLineIdx]
   line.y -= 10
   renderMeme()
 }
 
 function onMoveLineDown() {
-  const line = getMeme().lines[getMeme().selectedLineIdx]
+  const line = getMeme().lines[gMeme.selectedLineIdx]
   line.y += 10
   renderMeme()
 }
@@ -262,7 +257,7 @@ function onDeleteLine() {
     return
   }
   meme.lines.splice(meme.selectedLineIdx, 1)
-  meme.selectedLineIdx = Math.min(meme.selectedLineIdx, meme.lines.length - 1)  
+  meme.selectedLineIdx = Math.min(meme.selectedLineIdx, meme.lines.length - 1)
   updateTextInput()
   renderMeme()
 }
@@ -272,37 +267,32 @@ function onSaveMeme() {
   alert('Meme saved!')
 }
 
-function saveMeme() {
-  const meme = getMeme()
-  const savedMemes = loadFromStorage(MEME_STORAGE_KEY) || []
-  const canvasData = gElCanvas.toDataURL()
-  meme.dataUrl = canvasData
-  savedMemes.push(meme)
-  saveToStorage(MEME_STORAGE_KEY, savedMemes)
-}
-
-function getSavedMemes() {
-  return loadFromStorage(MEME_STORAGE_KEY) || []
-}
-
-function saveToStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
-}
-
-function loadFromStorage(key) {
-  return JSON.parse(localStorage.getItem(key))
-}
-
-function getMeme() {
-  return gMeme
-}
-
-function setMeme(meme) {
-  gMeme = meme
-}
-
 function onDeleteAllSavedMemes() {
-  localStorage.removeItem(MEME_STORAGE_KEY); 
-  document.getElementById('saved-memes-container').innerHTML = ''; 
-  alert('All saved memes have been deleted!');
+  localStorage.removeItem(MEME_STORAGE_KEY)
+  document.getElementById('saved-memes-container').innerHTML = ''
+  alert('All saved memes have been deleted!')
+}
+
+function onShowEmojiPicker() {
+  const emojiPicker = document.getElementById('emoji-picker')
+  emojiPicker.style.display = emojiPicker.style.display === 'none' ? 'block' : 'none'
+}
+
+function onEmojiSelect(emoji) {
+  addEmojiToMeme(emoji)
+}
+
+function addEmojiToMeme(emoji) {
+  const newLine = {
+    txt: emoji,
+    size: 50,
+    color: 'white',
+    x: 150,
+    y: getNewLineYPosition()
+  }
+  gMeme.lines.push(newLine)
+  gMeme.selectedLineIdx = gMeme.lines.length - 1
+  updateTextInput()
+  renderMeme()
+  document.getElementById('emoji-picker').style.display = 'none'
 }

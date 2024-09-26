@@ -1,13 +1,12 @@
 #editor-container {
   display: flex;
-  justify-content: flex-start; 
-  align-items: flex-start;
-  padding: 0;
+  flex-direction: row; 
+  align-items: stretch;
+  justify-content: center;
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 0;
-  position: relative; 
-  left: 300px;
+  gap: 20px;
 }
 
 .controls-group {

@@ -1,13 +1,3 @@
-/* #editor-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 0;
-} */
-
 #meme-area {
   display: flex;
   justify-content: center;
@@ -44,7 +34,6 @@
 }
 
 .controls-group button {
-  background-color: #00dbff;
   border: none;
   border-radius: 5px;
   padding: 10px;
