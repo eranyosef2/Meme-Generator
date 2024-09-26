@@ -80,23 +80,56 @@ function drawLineFrame(ctx, line, xPos) {
 
 
 function showGallery() {
-  document.getElementById('gallery').style.display = 'block';
-  document.getElementById('editor-container').style.display = 'none';
-  document.getElementById('about').style.display = 'none';
+  document.getElementById('gallery').style.display = 'block'
+  document.getElementById('editor-container').style.display = 'none'
+  document.getElementById('about').style.display = 'none'
+  document.getElementById('saved-memes').style.display = 'none'
 }
 
 function showEditor() {
-  document.getElementById('gallery').style.display = 'none';
-  document.getElementById('editor-container').style.display = 'flex';
-  document.getElementById('about').style.display = 'none';
+  document.getElementById('gallery').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'flex'
+  document.getElementById('about').style.display = 'none'
+  document.getElementById('saved-memes').style.display = 'none'
 }
 
 function showAbout() {
-  document.getElementById('gallery').style.display = 'none';
-  document.getElementById('editor-container').style.display = 'none';
-  document.getElementById('about').style.display = 'block';
+  document.getElementById('gallery').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'none'
+  document.getElementById('about').style.display = 'block'
+  document.getElementById('saved-memes').style.display = 'none'
 }
 
+function showSaved() {
+  const savedMemes = getSavedMemes()
+  const container = document.getElementById('saved-memes-container')
+  container.innerHTML = ''  
+
+  savedMemes.forEach((meme, idx) => {
+    const memeImg = document.createElement('img')
+    memeImg.src = `img/${meme.selectedImgId}.jpg`
+    memeImg.style.width = '150px'
+    memeImg.onclick = () => onReEditMeme(idx)
+
+    container.appendChild(memeImg)
+  })
+
+  document.getElementById('saved-memes').style.display = 'block'
+  document.getElementById('gallery').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'none'
+  document.getElementById('about').style.display = 'none'
+}
+
+function onReEditMeme(memeIdx) {
+  const savedMemes = getSavedMemes()
+  const meme = savedMemes[memeIdx]
+
+  setMeme(meme)
+  document.getElementById('saved-memes').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'block'
+  document.getElementById('editor-container').style.display = 'flex'
+  renderMeme()
+}
 
 function onTextInputChange() {
   const newText = document.getElementById('text-input').value
@@ -133,7 +166,6 @@ function changeFontSize(diff) {
   line.size += diff
   renderMeme()
 }
-
 
 function onAddLine() {
   const newLine = {
@@ -173,7 +205,7 @@ function onCanvasClick(ev) {
   const ctx = gElCanvas.getContext('2d')
 
   const clickedLine = meme.lines.find(line => {
-    ctx.font = `${line.size}px ${line.font || 'Impact'}` // Match font and size
+    ctx.font = `${line.size}px ${line.font || 'Impact'}`
     const textWidth = ctx.measureText(line.txt).width
 
     let xPos
@@ -209,6 +241,7 @@ function onSetFontFamily(font) {
   gMeme.lines[gMeme.selectedLineIdx].font = font
   renderMeme()
 }
+
 function onMoveLineUp() {
   const line = getMeme().lines[getMeme().selectedLineIdx]
   line.y -= 10
@@ -232,4 +265,44 @@ function onDeleteLine() {
   meme.selectedLineIdx = Math.min(meme.selectedLineIdx, meme.lines.length - 1)  
   updateTextInput()
   renderMeme()
+}
+
+function onSaveMeme() {
+  saveMeme()
+  alert('Meme saved!')
+}
+
+function saveMeme() {
+  const meme = getMeme()
+  const savedMemes = loadFromStorage(MEME_STORAGE_KEY) || []
+  const canvasData = gElCanvas.toDataURL()
+  meme.dataUrl = canvasData
+  savedMemes.push(meme)
+  saveToStorage(MEME_STORAGE_KEY, savedMemes)
+}
+
+function getSavedMemes() {
+  return loadFromStorage(MEME_STORAGE_KEY) || []
+}
+
+function saveToStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+  return JSON.parse(localStorage.getItem(key))
+}
+
+function getMeme() {
+  return gMeme
+}
+
+function setMeme(meme) {
+  gMeme = meme
+}
+
+function onDeleteAllSavedMemes() {
+  localStorage.removeItem(MEME_STORAGE_KEY); 
+  document.getElementById('saved-memes-container').innerHTML = ''; 
+  alert('All saved memes have been deleted!');
 }

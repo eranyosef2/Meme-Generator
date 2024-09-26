@@ -1,5 +1,6 @@
 'use strict'
 
+const MEME_STORAGE_KEY = 'savedMemes';
 var gCurrColor = '#000000'
 var gImgs = []
 
@@ -62,3 +63,28 @@ function getNewLineYPosition() {
   return canvas.height / 2 + lineCount * lineHeight
 }
 
+function saveMeme() {
+  const meme = getMeme()
+  const savedMemes = loadFromStorage(MEME_STORAGE_KEY) || [];
+  savedMemes.push(meme)
+  saveToStorage(MEME_STORAGE_KEY, savedMemes)
+}
+
+function getSavedMemes() {
+  return loadFromStorage(MEME_STORAGE_KEY) || [];
+}
+
+function saveToStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+  return JSON.parse(localStorage.getItem(key))
+}
+
+function getMeme() {
+  return gMeme
+}
+function setMeme(meme) {
+  gMeme = meme
+}

@@ -1,93 +1,99 @@
-#editor {
+/* #editor-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
-  background-color: #333;
-  border-radius: 10px;
-}
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 0;
+} */
 
 #meme-area {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  flex: 1;
-}
-
-#meme-canvas {
-  border: 2px solid #fff;
-  background-color: #fff;
-  border-radius: 10px;
-  max-width: 450px;
-  height: auto;
+  margin-right: 30px;
 }
 
 #editor-controls {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #2b2b2b;
+  gap: 10px;
+  padding: 10px;
+  background-color: #444;
   border-radius: 10px;
-  padding: 20px;
-  width: 300px;
-  gap: 20px;
+  min-height: 430px; 
+  max-width: 300px;
+  justify-content: space-between; 
 }
 
-.text-input {
-  width: 100%;
+#text-input {
   padding: 10px;
-  font-size: 1rem;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
   color: #333;
 }
 
-#editor-controls .controls-group {
+.controls-group {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  gap: 10px;
+  align-items: center;
+  gap: 5px;
 }
 
-#editor-controls .controls-group button {
-  background-color: #3a3a3a;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
+.controls-group button {
+  background-color: #00dbff;
   border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-#editor-controls .controls-group button img {
+.controls-group button:hover {
+  background-color: #009acd;
+}
+
+.controls-group img {
   width: 24px;
   height: auto;
 }
 
-.font-controls, .align-controls {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 10px;
+select#font-family {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
 }
 
-.font-controls button, .align-controls button {
-  background-color: #3a3a3a;
-  padding: 10px;
-  border-radius: 10px;
+#color-picker img {
+  width: 30px;
   cursor: pointer;
+  margin-right: 5px;
 }
 
-.select-controls {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
+#color-picker input {
+  display: none;
 }
 
-.select-controls select, .select-controls input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #444;
-  color: white;
-  border: none;
+@media screen and (max-width: 768px) {
+  #editor-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  #editor-controls {
+    width: 100%;
+    max-width: 400px;
+    min-height: unset; 
+  }
+
+  #meme-area {
+    width: 100%;
+    max-width: 100%;
+  }
 }

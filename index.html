@@ -13,6 +13,7 @@
     <div class="logo">LOGO</div>
     <nav>
       <a href="#" onclick="showGallery()">Gallery</a>
+      <a href="#" onclick="showSaved()">Saved</a> 
       <a href="#" onclick="showAbout()">About</a>
     </nav>
   </header>
@@ -28,62 +29,70 @@
       </div>
 
       <div id="editor-controls">
-        <!-- First Row: Text Input -->
         <input type="text" id="text-input" placeholder="Enter meme text" oninput="onTextInputChange()">
 
-        <!-- Second Row: Move Lines, Add Line, Delete Line -->
         <div class="controls-group">
-          <button onclick="onSwitchLine()">
+          <button class="editor-btn move-lines-btn" onclick="onSwitchLine()">
             <img src="img/switch-icon.png" alt="Switch Line">
           </button>
-          <button onclick="onAddLine()">
+          <button class="editor-btn add-line-button" onclick="onAddLine()">
             <img src="img/add-icon.png" alt="Add Line">
           </button>
-          <button onclick="onDeleteLine()">
+          <button class="editor-btn delete-line-button" onclick="onDeleteLine()">
             <img src="img/delete-icon.png" alt="Delete Line">
           </button>
         </div>
 
-        <!-- Third Row: Increase/Decrease Font, Align Text -->
         <div class="controls-group">
-          <button onclick="onIncreaseFont()">
+          <button class="editor-btn move-up-btn" onclick="onMoveLineUp()">
+            <img src="img/uparrow-icon.png" alt="Move Up">
+          </button>
+          <button class="editor-btn move-down-btn" onclick="onMoveLineDown()">
+            <img src="img/downarrow-icon.png" alt="Move Down">
+          </button>
+        </div>
+
+        <div class="controls-group">
+          <button class="editor-btn increase-font-button" onclick="onIncreaseFont()">
             <img src="img/increase-icon.png" alt="Increase Font Size">
           </button>
-          <button onclick="onDecreaseFont()">
+          <button class="editor-btn decrease-font-button" onclick="onDecreaseFont()">
             <img src="img/decrease-icon.png" alt="Decrease Font Size">
           </button>
         </div>
 
         <div class="controls-group">
-          <button onclick="onSetTextAlign('left')">
+          <button class="editor-btn align-left-button" onclick="onSetTextAlign('left')">
             <img src="img/left-icon.png" alt="Left Align">
           </button>
-          <button onclick="onSetTextAlign('center')">
+          <button class="editor-btn align-center-button" onclick="onSetTextAlign('center')">
             <img src="img/center-icon.png" alt="Center Align">
           </button>
-          <button onclick="onSetTextAlign('right')">
+          <button class="editor-btn align-right-button" onclick="onSetTextAlign('right')">
             <img src="img/right-icon.png" alt="Right Align">
           </button>
         </div>
 
-        <!-- Fourth Row: Font Selection, Color Selection -->
-        <div class="controls-group">
-          <label for="font-family">Font:</label>
+        <div class="controls-group font-family-control">
           <select id="font-family" onchange="onSetFontFamily(this.value)">
             <option value="Impact">Impact</option>
             <option value="Arial">Arial</option>
           </select>
         </div>
 
-        <div class="controls-group">
-          <label for="color">Color:</label>
+        <div class="controls-group color-change-control">
+          <label for="color">
+            <img src="img/paint-icon.png" alt="Pick Color">
+          </label>
           <input type="color" id="color" name="color" value="#000000" oninput="onSetColor(event)">
         </div>
 
-        <!-- Download Button -->
         <div class="controls-group">
           <a href="#" onclick="downloadCanvas(this)" download>
             <i class="fa-solid fa-download" style="font-size: 24px; cursor: pointer;"></i>
+          </a>
+          <a href="#" class="save-button" onclick="onSaveMeme()">
+            <i class="fa-solid fa-save" style="font-size: 24px; cursor: pointer;"></i>
           </a>
         </div>
       </div>
@@ -93,6 +102,13 @@
       <h2>About This Meme Generator</h2>
       <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start
         editing!</p>
+    </section>
+
+    <section id="saved-memes" style="display: none;">
+      <h2>Saved Memes</h2>
+      <div id="saved-memes-container"></div> 
+      <a href="#" class="delete-all-button" onclick="onDeleteAllSavedMemes()">Delete All Saved Memes</a>
+
     </section>
   </main>
 

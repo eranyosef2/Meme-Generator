@@ -1,41 +1,117 @@
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-button img {
-  width: 30px;
-  height: auto;
-}
-
-label img {
-  width: 30px;
-  height: auto;
-  cursor: pointer;
-}
-
-#editor-controls {
+#editor-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-start; 
+  align-items: flex-start;
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 0;
+  position: relative; 
+  left: 300px;
+}
+
+.controls-group {
+  display: flex;
+  justify-content: center;
   gap: 15px;
-  width: 100%;
+  margin-bottom: 15px;
 }
 
-#editor-controls .controls-group button {
-  background-color: #3a3a3a;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-#editor-controls select, #editor-controls input[type="color"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
+.editor-btn {
   border: none;
-  background-color: #444;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.move-lines-btn {
+  background-color: #00bcd4;
+}
+
+.move-lines-btn img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.add-line-button {
+  background-color: #4caf50;
+}
+
+.add-line-button img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.delete-line-button {
+  background-color: #f44336;
+}
+
+.delete-line-button img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.increase-font-button,
+.decrease-font-button {
+  background-color: white;
+}
+
+.increase-font-button img,
+.decrease-font-button img {
+  filter: none;
+}
+
+.align-left-button,
+.align-center-button,
+.align-right-button {
+  background-color: white;
+}
+
+.align-left-button img,
+.align-center-button img,
+.align-right-button img {
+  filter: none;
+}
+
+.color-change-control {
+  background-color: white;
+}
+
+.color-change-control img {
+  filter: none;
+}
+
+.font-family-control {
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.editor-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.save-button,
+a[download] {
   color: white;
 }
+
+.save-button i {
+  color: white;
+  transition: color 0.3s;
+}
+
+.save-button:hover i {
+  color: cyan;
+}
+.move-up-btn {
+  width: 50px;
+  height: 50px;
+}
+
+.move-down-btn {
+  width: 50px;
+  height: 50px;
+}
+
+
