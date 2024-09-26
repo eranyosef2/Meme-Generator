@@ -16,6 +16,7 @@ var gMeme = {
       txt: 'Enter meme Text',
       size: 20,
       color: 'white',
+      strokeColor: 'black',
       x: 150,
       y: 50
     },
@@ -23,6 +24,7 @@ var gMeme = {
       txt: 'Enter meme Text',
       size: 20,
       color: 'white',
+      strokeColor: 'black',
       x: 150,
       y: 400
     }
@@ -51,6 +53,10 @@ function setLineTxt(newText) {
 
 function setLineColor(color) {
   gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function setLineStrokeColor(color) {
+  gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
 }
 
 function getNewLineYPosition() {

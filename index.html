@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,12 @@
 
 <body onload="onInit()">
   <header>
-    <div class="logo">LOGO
+    <div class="logo">
+      <img src="img/Logologo.png" alt="">
     </div>
     <nav>
       <a href="#" onclick="showGallery()">Gallery</a>
-      <a href="#" onclick="showSaved()">Saved</a> 
+      <a href="#" onclick="showSaved()">Saved</a>
       <a href="#" onclick="showAbout()">About</a>
     </nav>
   </header>
@@ -73,7 +75,7 @@
             <img src="img/right-icon.png" alt="Right Align">
           </button>
         </div>
-        
+
         <div class="controls-group">
           <button class="editor-btn emoji-button" onclick="onShowEmojiPicker()">
             😀
@@ -89,22 +91,37 @@
         </div>
 
         <div class="controls-group font-family-control">
-          <select id="font-family" onchange="onSetFontFamily(this.value)">
-            <option value="Impact">Impact</option>
-            <option value="Arial">Arial</option>
+          <select id="font-family" onchange="onSetFontFamily(this.value)" class="font-selector">
+            <option value="Impact" style="font-family: Impact;">Impact</option>
+            <option value="Arial" style="font-family: Arial;">Arial</option>
           </select>
         </div>
 
-        <div class="controls-group color-change-control">
-          <label for="color">
-            <img src="img/paint-icon.png" alt="Pick Color">
-          </label>
-          <input type="color" id="color" name="color" value="#000000" oninput="onSetColor(event)">
+        <div class="controls-group color-change-control"
+          style="display: flex; gap: 10px; align-items: center; border: 1px solid #ccc; padding: 5px;">
+          <div class="color-change-control">
+            <img src="img/paint-icon.png" alt="Pick Text Color"
+              onclick="document.getElementById('text-color-picker').click()">
+            <input type="color" id="text-color-picker" style="display: none;" onchange="onSetColor(event)">
+          </div>
+
+          <span class="color-label">T ← Colors → S</span>
+
+          <div class="stroke-color-control">
+            <img src="img/stroke-icon.png" alt="Pick Stroke Color"
+              onclick="document.getElementById('stroke-color-picker').click()">
+            <input type="color" id="stroke-color-picker" style="display: none;" onchange="onSetStrokeColor(event)">
+          </div>
         </div>
 
-        <div class="controls-group">
+        <div class="controls-group"
+          style="display: flex; gap: 10px; align-items: center; border: 1px solid #ccc; padding: 5px;">
           <a href="#" onclick="downloadCanvas(this)" download>
             <i class="fa-solid fa-download" style="font-size: 24px; cursor: pointer;"></i>
+          </a>
+          <a href="#" onclick="onShareFacebook()">
+            <img src="img/facebook-icon.png" alt="Share on Facebook" style="width: 24px; cursor: pointer;"
+              class="facebook-icon">
           </a>
           <a href="#" class="save-button" onclick="onSaveMeme()">
             <i class="fa-solid fa-save" style="font-size: 24px; cursor: pointer;"></i>
@@ -115,12 +132,13 @@
 
     <section id="about" style="display: none;">
       <h2>About This Meme Generator</h2>
-      <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start editing!</p>
+      <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start
+        editing!</p>
     </section>
 
     <section id="saved-memes" style="display: none;">
       <h2>Saved Memes</h2>
-      <div id="saved-memes-container"></div> 
+      <div id="saved-memes-container"></div>
       <a href="#" class="delete-all-button" onclick="onDeleteAllSavedMemes()">Delete All Saved Memes</a>
     </section>
   </main>
@@ -130,4 +148,5 @@
   <script src="js/meme-service.js"></script>
   <script src="js/meme-controller.js"></script>
 </body>
+
 </html>

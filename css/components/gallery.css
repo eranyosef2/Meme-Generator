@@ -28,7 +28,7 @@
 
 
 @media screen and (max-width: 768px) {
-    #img-gallery img {
-      width: 80px; 
-    }
+  #img-gallery img {
+    width: 80px;
   }
+}

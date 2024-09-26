@@ -44,16 +44,16 @@ function renderMeme() {
     meme.lines.forEach((line, idx) => {
       ctx.font = `${line.size}px ${line.font || 'Impact'}`
       ctx.fillStyle = line.color || 'white'
-      ctx.strokeStyle = 'black'
+      ctx.strokeStyle = line.strokeColor || 'black'
       ctx.lineWidth = 3
       ctx.textAlign = line.align || 'left'
 
-      let xPos = line.x 
+      let xPos = line.x
       if (line.align === 'center') {
         xPos = gElCanvas.width / 2
       } else if (line.align === 'right') {
         xPos = gElCanvas.width - 50
-      } 
+      }
 
       ctx.strokeText(line.txt, xPos, line.y)
       ctx.fillText(line.txt, xPos, line.y)
@@ -150,6 +150,11 @@ function onSetColor(ev) {
   gCurrColor = ev.target.value
   setLineColor(gCurrColor)
   renderMeme()
+}
+function onSetStrokeColor(ev) {
+  const strokeColor = ev.target.value;
+  setLineStrokeColor(strokeColor);
+  renderMeme();
 }
 
 function onIncreaseFont() {
@@ -301,7 +306,7 @@ function addEmojiToMeme(emoji) {
   document.getElementById('emoji-picker').style.display = 'none'
 }
 
-function onCanvasMouseDown(ev) { 
+function onCanvasMouseDown(ev) {
   const { offsetX, offsetY } = ev
   const meme = getMeme()
   const ctx = gElCanvas.getContext('2d')
@@ -316,7 +321,7 @@ function onCanvasMouseDown(ev) {
     } else if (line.align === 'right') {
       xPos = gElCanvas.width - textWidth - 50
     } else {
-      xPos = line.x 
+      xPos = line.x
     }
 
     const isClicked = (
@@ -350,8 +355,8 @@ function onCanvasMouseMove(ev) {
   const { offsetX, offsetY } = ev
   const draggedLine = meme.lines[gDraggedLineIdx]
 
-  draggedLine.x = offsetX - gDragStartOffset.x 
-  draggedLine.y = offsetY - gDragStartOffset.y 
+  draggedLine.x = offsetX - gDragStartOffset.x
+  draggedLine.y = offsetY - gDragStartOffset.y
   renderMeme()
 }
 
@@ -359,4 +364,10 @@ function onCanvasMouseUp() {
   gIsDragging = false
   gDraggedLineIdx = null
   gElCanvas.style.cursor = 'default'
+}
+
+function onShareFacebook() {
+  const canvasUrl = gElCanvas.toDataURL('image/jpeg');
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canvasUrl)}`;
+  window.open(facebookUrl, '_blank');
 }

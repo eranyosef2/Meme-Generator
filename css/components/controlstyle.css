@@ -1,6 +1,6 @@
 #editor-container {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: stretch;
   justify-content: center;
   padding: 20px;
@@ -11,10 +11,10 @@
 
 .controls-group {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  align-items: center;
+  gap: 2;
 }
+
 
 .editor-btn {
   border: none;
@@ -72,11 +72,16 @@
 }
 
 .color-change-control {
-  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
 }
 
 .color-change-control img {
   filter: none;
+  filter: invert(100%) brightness(200%);
 }
 
 .font-family-control {
@@ -103,6 +108,7 @@ a[download] {
 .save-button:hover i {
   color: cyan;
 }
+
 .move-up-btn {
   width: 50px;
   height: 50px;
@@ -114,3 +120,130 @@ a[download] {
 }
 
 
+
+
+.controls-group img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.stroke-color-control img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.controls-group img,
+.color-change-control img,
+.stroke-color-control img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.color-change-control input[type="color"],
+.stroke-color-control input[type="color"] {
+  display: none;
+}
+
+
+.color-change-control img,
+.stroke-color-control img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+}
+
+.controls-group,
+.font-family-control,
+.color-change-control {
+  background-color: transparent;
+  border: none;
+}
+
+.controls-group img,
+.font-family-control img,
+.color-change-control img {
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: auto;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.emoji-picker-control img,
+.font-family-control select,
+.color-change-control img,
+.stroke-color-control img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.font-family-control select {
+  width: 100%;
+  padding: 10px;
+  font-size: 25px;  
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+}
+
+
+
+.emoji-button {
+  width: 100%; 
+  text-align: center;
+  font-size: 24px; 
+}
+
+#emoji-picker {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%; 
+}
+
+.facebook-icon {
+  width: 24px;
+  cursor: pointer;
+  filter: invert(100%) brightness(100%) contrast(100%);
+}
+.color-label {
+  font-size: 16px;
+  color: white;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+font-selector {
+  width: 100%; 
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  display: block;
+}
+
+
+.font-selector option {
+  font-family: inherit;
+}
+
+.controls-group.font-family-control {
+  width: 100%; 
+  display: flex;
+  align-items: center;
+}

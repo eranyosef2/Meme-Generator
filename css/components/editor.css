@@ -12,9 +12,9 @@
   padding: 10px;
   background-color: #444;
   border-radius: 10px;
-  min-height: 430px; 
+  min-height: 430px;
   max-width: 300px;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 #text-input {
@@ -68,6 +68,14 @@ select#font-family {
   display: none;
 }
 
+.color-change-control,
+.stroke-color-control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
 @media screen and (max-width: 768px) {
   #editor-container {
     flex-direction: column;
@@ -78,7 +86,7 @@ select#font-family {
   #editor-controls {
     width: 100%;
     max-width: 400px;
-    min-height: unset; 
+    min-height: unset;
   }
 
   #meme-area {
