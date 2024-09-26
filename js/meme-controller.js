@@ -36,27 +36,48 @@ function renderMeme() {
 
     const meme = getMeme()
     meme.lines.forEach((line, idx) => {
-      ctx.font = `${line.size}px Arial`
-      ctx.fillStyle = line.color
-      ctx.fillText(line.txt, line.x, line.y)
+      ctx.font = `${line.size}px ${line.font || 'Impact'}`
+      ctx.fillStyle = line.color || 'white'
+      ctx.strokeStyle = 'black'
+      ctx.lineWidth = 3
+      ctx.textAlign = line.align || 'left'
+
+      let xPos
+      if (line.align === 'center') {
+        xPos = gElCanvas.width / 2
+      } else if (line.align === 'right') {
+        xPos = gElCanvas.width - 50
+      } else {
+        xPos = 50
+      }
+
+      ctx.strokeText(line.txt, xPos, line.y)
+      ctx.fillText(line.txt, xPos, line.y)
 
       if (idx === meme.selectedLineIdx) {
-        drawLineFrame(ctx, line)
+        drawLineFrame(ctx, line, xPos)
       }
     })
   }
 }
 
-function drawLineFrame(ctx, line) {
+function drawLineFrame(ctx, line, xPos) {
   const textMetrics = ctx.measureText(line.txt)
   const padding = 10
 
   ctx.beginPath()
-  ctx.rect(line.x - padding, line.y - line.size, textMetrics.width + padding * 2, line.size + padding * 2)
+  if (line.align === 'center') {
+    ctx.rect(xPos - textMetrics.width / 2 - padding, line.y - line.size, textMetrics.width + padding * 2, line.size + padding * 2)
+  } else if (line.align === 'right') {
+    ctx.rect(xPos - textMetrics.width - padding, line.y - line.size, textMetrics.width + padding * 2, line.size + padding * 2)
+  } else {
+    ctx.rect(xPos - padding, line.y - line.size, textMetrics.width + padding * 2, line.size + padding * 2)
+  }
   ctx.strokeStyle = 'black'
   ctx.lineWidth = 2
   ctx.stroke()
 }
+
 
 function showEditor() {
   document.getElementById('img-gallery').style.display = 'none'
@@ -112,11 +133,12 @@ function changeFontSize(diff) {
   renderMeme()
 }
 
+
 function onAddLine() {
   const newLine = {
     txt: 'Enter Meme Text', 
     size: 20,
-    color: gCurrColor,  
+    color: 'white',  
     x: 50,
     y: getNewLineYPosition()
   }
@@ -156,13 +178,24 @@ function onCanvasClick(ev) {
   const ctx = gElCanvas.getContext('2d')
 
   const clickedLine = meme.lines.find(line => {
-    ctx.font = `${line.size}px Arial`
+    ctx.font = `${line.size}px ${line.font || 'Impact'}` // Match font and size
     const textWidth = ctx.measureText(line.txt).width
 
-    return offsetX >= line.x &&
-           offsetX <= line.x + textWidth &&
-           offsetY >= line.y - line.size &&
-           offsetY <= line.y
+    let xPos
+    if (line.align === 'center') {
+      xPos = gElCanvas.width / 2 - textWidth / 2
+    } else if (line.align === 'right') {
+      xPos = gElCanvas.width - textWidth - 50
+    } else {
+      xPos = 50
+    }
+
+    return (
+      offsetX >= xPos &&
+      offsetX <= xPos + textWidth &&
+      offsetY >= line.y - line.size &&
+      offsetY <= line.y
+    )
   })
 
   if (clickedLine) {
@@ -170,4 +203,14 @@ function onCanvasClick(ev) {
     updateTextInput()
     renderMeme()
   }
+}
+
+function onSetTextAlign(align) {
+  gMeme.lines[gMeme.selectedLineIdx].align = align
+  renderMeme()
+}
+
+function onSetFontFamily(font) {
+  gMeme.lines[gMeme.selectedLineIdx].font = font
+  renderMeme()  
 }

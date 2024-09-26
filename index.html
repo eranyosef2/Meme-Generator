@@ -51,8 +51,29 @@
     <button onclick="onSwitchLine()">
       <img src="img/switch-icon.png" alt="" style="width: 30px;">
     </button>
-      </section>
+    <label for="font-family">Font Family:</label>
+    <select id="font-family" onchange="onSetFontFamily(this.value)">
+      <option value="Impact">Impact</option>
+      <option value="Arial">Arial</option>
+    </select>
+    <!-- <label for="font-size">Font Size:</label> -->
+    <!-- <input type="number" id="font-size" value="40" min="10" onchange="onSetFontSize(this.value)"> -->
+    <label for="text-align"></label>
+    <button onclick="onSetTextAlign('left')">
+      <img src="img/left-icon.png" alt="Left Align" style="width: 30px;">
+    </button>
+    <button onclick="onSetTextAlign('center')">
+      <img src="img/center-icon.png" alt="Center Align" style="width: 30px;">
+    </button>
+    <button onclick="onSetTextAlign('right')">
+      <img src="img/right-icon.png" alt="Right Align" style="width: 30px;">
+    </button>
+  </section>
+  </section>
   
+
+
+
       <!-- About Section -->
       <section id="about" style="display: none;">
         <h2>About This Meme Generator</h2>

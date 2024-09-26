@@ -14,14 +14,14 @@ for (let i = 1; i <= 18; i++) {
       {
         txt: 'Enter meme Text', 
         size: 20,
-        color:'#000000',
+        color:'white',
         x: 150, 
         y: 50  
       },
       {
         txt: 'Enter meme Text', 
         size: 20,
-        color:'#ff0000',
+        color:'white',
         x: 150,
         y: 400 
       }
