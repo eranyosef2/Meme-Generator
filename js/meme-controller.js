@@ -3,10 +3,16 @@
 var ctx
 var gCurrColor = '#000000'
 var gElCanvas
+var gIsDragging = false
+var gDraggedLineIdx = null
+var gDragStartOffset = { x: 0, y: 0 }
 
 function onInit() {
   gElCanvas = document.getElementById('meme-canvas')
-  gElCanvas.addEventListener('click', onCanvasClick)
+  gElCanvas.addEventListener('mousedown', onCanvasMouseDown)
+  gElCanvas.addEventListener('mousemove', onCanvasMouseMove)
+  gElCanvas.addEventListener('mouseup', onCanvasMouseUp)
+  gElCanvas.addEventListener('mouseleave', onCanvasMouseUp)
   renderGallery()
 }
 
@@ -42,14 +48,12 @@ function renderMeme() {
       ctx.lineWidth = 3
       ctx.textAlign = line.align || 'left'
 
-      let xPos
+      let xPos = line.x 
       if (line.align === 'center') {
         xPos = gElCanvas.width / 2
       } else if (line.align === 'right') {
         xPos = gElCanvas.width - 50
-      } else {
-        xPos = 50
-      }
+      } 
 
       ctx.strokeText(line.txt, xPos, line.y)
       ctx.fillText(line.txt, xPos, line.y)
@@ -295,4 +299,64 @@ function addEmojiToMeme(emoji) {
   updateTextInput()
   renderMeme()
   document.getElementById('emoji-picker').style.display = 'none'
+}
+
+function onCanvasMouseDown(ev) { 
+  const { offsetX, offsetY } = ev
+  const meme = getMeme()
+  const ctx = gElCanvas.getContext('2d')
+
+  const clickedLine = meme.lines.find((line, idx) => {
+    ctx.font = `${line.size}px ${line.font || 'Impact'}`
+    const textWidth = ctx.measureText(line.txt).width
+
+    let xPos
+    if (line.align === 'center') {
+      xPos = gElCanvas.width / 2 - textWidth / 2
+    } else if (line.align === 'right') {
+      xPos = gElCanvas.width - textWidth - 50
+    } else {
+      xPos = line.x 
+    }
+
+    const isClicked = (
+      offsetX >= xPos &&
+      offsetX <= xPos + textWidth &&
+      offsetY >= line.y - line.size &&
+      offsetY <= line.y
+    )
+
+    if (isClicked) {
+      gDraggedLineIdx = idx
+      gIsDragging = true
+      gElCanvas.style.cursor = 'grabbing'
+      gDragStartOffset = { x: offsetX - xPos, y: offsetY - line.y }
+      return true
+    }
+    return false
+  })
+
+  if (clickedLine) {
+    gMeme.selectedLineIdx = meme.lines.indexOf(clickedLine)
+    updateTextInput()
+    renderMeme()
+  }
+}
+
+function onCanvasMouseMove(ev) {
+  if (!gIsDragging || gDraggedLineIdx === null) return
+
+  const meme = getMeme()
+  const { offsetX, offsetY } = ev
+  const draggedLine = meme.lines[gDraggedLineIdx]
+
+  draggedLine.x = offsetX - gDragStartOffset.x 
+  draggedLine.y = offsetY - gDragStartOffset.y 
+  renderMeme()
+}
+
+function onCanvasMouseUp() {
+  gIsDragging = false
+  gDraggedLineIdx = null
+  gElCanvas.style.cursor = 'default'
 }
