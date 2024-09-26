@@ -1,27 +1,93 @@
-.editor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    margin: 20px;
-    border-radius: 10px;
-  }
-  
-  canvas {
-    border: 2px solid #fff;
-    background-color: #fff;
-    width: 100%;
-    max-width : 450px;
-    height: auto;
-    
-  }
-  #editor {
-    display: none;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    margin: 0 auto; 
-  }
-  
+#editor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+}
+
+#meme-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+#meme-canvas {
+  border: 2px solid #fff;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 450px;
+  height: auto;
+}
+
+#editor-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2b2b2b;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  gap: 20px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+#editor-controls .controls-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+#editor-controls .controls-group button {
+  background-color: #3a3a3a;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+#editor-controls .controls-group button img {
+  width: 24px;
+  height: auto;
+}
+
+.font-controls, .align-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.font-controls button, .align-controls button {
+  background-color: #3a3a3a;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.select-controls {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.select-controls select, .select-controls input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #444;
+  color: white;
+  border: none;
+}

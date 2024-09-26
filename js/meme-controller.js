@@ -2,11 +2,11 @@
 
 var ctx
 var gCurrColor = '#000000'
-var gElCanvas 
+var gElCanvas
 
 function onInit() {
-  gElCanvas = document.getElementById('meme-canvas') 
-  gElCanvas.addEventListener('click', onCanvasClick) 
+  gElCanvas = document.getElementById('meme-canvas')
+  gElCanvas.addEventListener('click', onCanvasClick)
   renderGallery()
 }
 
@@ -79,23 +79,24 @@ function drawLineFrame(ctx, line, xPos) {
 }
 
 
-function showEditor() {
-  document.getElementById('img-gallery').style.display = 'none'
-  document.getElementById('editor').style.display = 'block'
+function showGallery() {
+  document.getElementById('gallery').style.display = 'block';
+  document.getElementById('editor-container').style.display = 'none';
+  document.getElementById('about').style.display = 'none';
 }
 
-function showGallery() {
-  document.getElementById('gallery').style.display = 'block'
-  document.getElementById('img-gallery').style.display = 'flex'
-  document.getElementById('editor').style.display = 'none'
-  document.getElementById('about').style.display = 'none'
+function showEditor() {
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('editor-container').style.display = 'flex';
+  document.getElementById('about').style.display = 'none';
 }
 
 function showAbout() {
-  document.getElementById('gallery').style.display = 'none'
-  document.getElementById('editor').style.display = 'none'
-  document.getElementById('about').style.display = 'block'
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('editor-container').style.display = 'none';
+  document.getElementById('about').style.display = 'block';
 }
+
 
 function onTextInputChange() {
   const newText = document.getElementById('text-input').value
@@ -136,9 +137,9 @@ function changeFontSize(diff) {
 
 function onAddLine() {
   const newLine = {
-    txt: 'Enter Meme Text', 
+    txt: 'Enter Meme Text',
     size: 20,
-    color: 'white',  
+    color: 'white',
     x: 50,
     y: getNewLineYPosition()
   }
@@ -146,12 +147,6 @@ function onAddLine() {
   gMeme.selectedLineIdx = gMeme.lines.length - 1
   updateTextInput()
   renderMeme()
-}
-
-function getNewLineYPosition() {
-  const lineCount = gMeme.lines.length
-  const lineHeight = 50
-  return gElCanvas.height / 2 + lineCount * lineHeight
 }
 
 function onSwitchLine() {
@@ -212,5 +207,29 @@ function onSetTextAlign(align) {
 
 function onSetFontFamily(font) {
   gMeme.lines[gMeme.selectedLineIdx].font = font
-  renderMeme()  
+  renderMeme()
+}
+function onMoveLineUp() {
+  const line = getMeme().lines[getMeme().selectedLineIdx]
+  line.y -= 10
+  renderMeme()
+}
+
+function onMoveLineDown() {
+  const line = getMeme().lines[getMeme().selectedLineIdx]
+  line.y += 10
+  renderMeme()
+}
+
+function onDeleteLine() {
+  const meme = getMeme()
+
+  if (meme.lines.length === 1) {
+    alert('Cant delete the last line!')
+    return
+  }
+  meme.lines.splice(meme.selectedLineIdx, 1)
+  meme.selectedLineIdx = Math.min(meme.selectedLineIdx, meme.lines.length - 1)  
+  updateTextInput()
+  renderMeme()
 }

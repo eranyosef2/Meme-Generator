@@ -2,7 +2,7 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
 }
 
 button img {
@@ -14,4 +14,28 @@ label img {
   width: 30px;
   height: auto;
   cursor: pointer;
+}
+
+#editor-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+#editor-controls .controls-group button {
+  background-color: #3a3a3a;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#editor-controls select, #editor-controls input[type="color"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #444;
+  color: white;
 }

@@ -7,83 +7,98 @@
   <script src="https://kit.fontawesome.com/92c3bd79e1.js" crossorigin="anonymous"></script>
   <title>myMeme Generator</title>
 </head>
+
 <body onload="onInit()">
-    <header>
-      <div class="logo">LOGO</div>
-      <nav>
-        <a href="#" onclick="showGallery()">Gallery</a>
-        <a href="#" onclick="showAbout()">About</a> <!-- About Tab -->
-      </nav>
-    </header>
-  
-    <main>
-      <!-- Gallery Section -->
-      <section id="gallery">
-        <div id="img-gallery"></div>
-      </section>
-  
-      <!-- Editor Section -->
-      <section id="editor" style="display: none;">
+  <header>
+    <div class="logo">LOGO</div>
+    <nav>
+      <a href="#" onclick="showGallery()">Gallery</a>
+      <a href="#" onclick="showAbout()">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="gallery">
+      <div id="img-gallery"></div>
+    </section>
+
+    <section id="editor-container" style="display: none;">
+      <div id="meme-area">
         <canvas id="meme-canvas" width="450" height="450"></canvas>
+      </div>
+
+      <div id="editor-controls">
+        <!-- First Row: Text Input -->
         <input type="text" id="text-input" placeholder="Enter meme text" oninput="onTextInputChange()">
-        <a href="#" onclick="downloadCanvas(this)" download>
-          <i class="fa-solid fa-download" style="font-size: 24px; cursor: pointer;"></i>
-        </a>
-        <label for="color">
-          <img src="img/paint-icon.png" alt="" style="width: 30px;">
-        </label>
-        <input
-        type="color"
-        id="color"
-        name="color"
-        value="#000000"
-        oninput="onSetColor(event)"
-      />
-      <button onclick="onIncreaseFont()">
-      <img src="img/increase-icon.png" alt="" style="width: 30px;">
-    </button>
-      <button onclick="onDecreaseFont()">
-      <img src="img/decrease-icon.png" alt="" style="width: 30px;">
-    </button>
-    <button onclick="onAddLine()">
-      <img src="img/add-icon.png" alt="" style="width: 30px;">
-    </button>
-    <button onclick="onSwitchLine()">
-      <img src="img/switch-icon.png" alt="" style="width: 30px;">
-    </button>
-    <label for="font-family">Font Family:</label>
-    <select id="font-family" onchange="onSetFontFamily(this.value)">
-      <option value="Impact">Impact</option>
-      <option value="Arial">Arial</option>
-    </select>
-    <!-- <label for="font-size">Font Size:</label> -->
-    <!-- <input type="number" id="font-size" value="40" min="10" onchange="onSetFontSize(this.value)"> -->
-    <label for="text-align"></label>
-    <button onclick="onSetTextAlign('left')">
-      <img src="img/left-icon.png" alt="Left Align" style="width: 30px;">
-    </button>
-    <button onclick="onSetTextAlign('center')">
-      <img src="img/center-icon.png" alt="Center Align" style="width: 30px;">
-    </button>
-    <button onclick="onSetTextAlign('right')">
-      <img src="img/right-icon.png" alt="Right Align" style="width: 30px;">
-    </button>
-  </section>
-  </section>
-  
 
+        <!-- Second Row: Move Lines, Add Line, Delete Line -->
+        <div class="controls-group">
+          <button onclick="onSwitchLine()">
+            <img src="img/switch-icon.png" alt="Switch Line">
+          </button>
+          <button onclick="onAddLine()">
+            <img src="img/add-icon.png" alt="Add Line">
+          </button>
+          <button onclick="onDeleteLine()">
+            <img src="img/delete-icon.png" alt="Delete Line">
+          </button>
+        </div>
 
+        <!-- Third Row: Increase/Decrease Font, Align Text -->
+        <div class="controls-group">
+          <button onclick="onIncreaseFont()">
+            <img src="img/increase-icon.png" alt="Increase Font Size">
+          </button>
+          <button onclick="onDecreaseFont()">
+            <img src="img/decrease-icon.png" alt="Decrease Font Size">
+          </button>
+        </div>
 
-      <!-- About Section -->
-      <section id="about" style="display: none;">
-        <h2>About This Meme Generator</h2>
-        <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start editing!</p>
-      </section>
-    </main>
-  
-    <script src="js/gallery-service.js"></script>
-    <script src="js/gallery-controller.js"></script>
-    <script src="js/meme-service.js"></script>
-    <script src="js/meme-controller.js"></script>
+        <div class="controls-group">
+          <button onclick="onSetTextAlign('left')">
+            <img src="img/left-icon.png" alt="Left Align">
+          </button>
+          <button onclick="onSetTextAlign('center')">
+            <img src="img/center-icon.png" alt="Center Align">
+          </button>
+          <button onclick="onSetTextAlign('right')">
+            <img src="img/right-icon.png" alt="Right Align">
+          </button>
+        </div>
+
+        <!-- Fourth Row: Font Selection, Color Selection -->
+        <div class="controls-group">
+          <label for="font-family">Font:</label>
+          <select id="font-family" onchange="onSetFontFamily(this.value)">
+            <option value="Impact">Impact</option>
+            <option value="Arial">Arial</option>
+          </select>
+        </div>
+
+        <div class="controls-group">
+          <label for="color">Color:</label>
+          <input type="color" id="color" name="color" value="#000000" oninput="onSetColor(event)">
+        </div>
+
+        <!-- Download Button -->
+        <div class="controls-group">
+          <a href="#" onclick="downloadCanvas(this)" download>
+            <i class="fa-solid fa-download" style="font-size: 24px; cursor: pointer;"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" style="display: none;">
+      <h2>About This Meme Generator</h2>
+      <p>This meme generator allows you to create and customize memes using various templates. Click on a meme to start
+        editing!</p>
+    </section>
+  </main>
+
+  <script src="js/gallery-service.js"></script>
+  <script src="js/gallery-controller.js"></script>
+  <script src="js/meme-service.js"></script>
+  <script src="js/meme-controller.js"></script>
 </body>
-  </html>
+</html>
