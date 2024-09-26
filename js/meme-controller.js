@@ -27,7 +27,7 @@ function renderGallery() {
 function onImgSelect(imgId) {
   setSelectedImg(imgId)
   showEditor()
-  renderMeme()
+  renderMeme() 
 }
 
 function renderMeme() {
@@ -96,48 +96,11 @@ function showEditor() {
   document.getElementById('saved-memes').style.display = 'none'
 }
 
-function showAbout() {
-  document.getElementById('gallery').style.display = 'none'
-  document.getElementById('editor-container').style.display = 'none'
-  document.getElementById('about').style.display = 'block'
-  document.getElementById('saved-memes').style.display = 'none'
-}
-
-function showSaved() {
-  const savedMemes = getSavedMemes()
-  const container = document.getElementById('saved-memes-container')
-  container.innerHTML = ''
-
-  savedMemes.forEach((meme, idx) => {
-    const memeImg = document.createElement('img')
-    memeImg.src = `img/${meme.selectedImgId}.jpg`
-    memeImg.style.width = '150px'
-    memeImg.onclick = () => onReEditMeme(idx)
-
-    container.appendChild(memeImg)
-  })
-
-  document.getElementById('saved-memes').style.display = 'block'
-  document.getElementById('gallery').style.display = 'none'
-  document.getElementById('editor-container').style.display = 'none'
-  document.getElementById('about').style.display = 'none'
-}
-
-function onReEditMeme(memeIdx) {
-  const savedMemes = getSavedMemes()
-  const meme = savedMemes[memeIdx]
-
-  setMeme(meme)
-  document.getElementById('saved-memes').style.display = 'none'
-  document.getElementById('editor-container').style.display = 'block'
-  document.getElementById('editor-container').style.display = 'flex'
-  renderMeme()
-}
 
 function onTextInputChange() {
   const newText = document.getElementById('text-input').value
   setLineTxt(newText)
-  renderMeme()
+  renderMeme() 
 }
 
 function downloadCanvas(elLink) {
@@ -149,12 +112,13 @@ function downloadCanvas(elLink) {
 function onSetColor(ev) {
   gCurrColor = ev.target.value
   setLineColor(gCurrColor)
-  renderMeme()
+  renderMeme() 
 }
+
 function onSetStrokeColor(ev) {
-  const strokeColor = ev.target.value;
-  setLineStrokeColor(strokeColor);
-  renderMeme();
+  const strokeColor = ev.target.value
+  setLineStrokeColor(strokeColor)
+  renderMeme() 
 }
 
 function onIncreaseFont() {
@@ -168,7 +132,7 @@ function onDecreaseFont() {
 function changeFontSize(diff) {
   const line = getMeme().lines[getMeme().selectedLineIdx]
   line.size += diff
-  renderMeme()
+  renderMeme() 
 }
 
 function onAddLine() {
@@ -182,7 +146,7 @@ function onAddLine() {
   gMeme.lines.push(newLine)
   gMeme.selectedLineIdx = gMeme.lines.length - 1
   updateTextInput()
-  renderMeme()
+  renderMeme() 
 }
 
 function onSwitchLine() {
@@ -190,26 +154,33 @@ function onSwitchLine() {
   const totalLines = meme.lines.length
   meme.selectedLineIdx = (meme.selectedLineIdx + 1) % totalLines
   updateTextInput()
-  renderMeme()
+  renderMeme() 
 }
-
 function updateTextInput() {
-  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
-  const textInput = document.getElementById('text-input')
-  textInput.value = selectedLine.txt === 'Enter Meme Text' ? '' : selectedLine.txt
-  textInput.placeholder = 'Enter Meme Text'
+  const selectedLine = getMeme().lines[getMeme().selectedLineIdx];
+  const textInput = document.getElementById('text-input');
+  
+  if (textInput) {
+    textInput.value = selectedLine.txt === 'Enter Meme Text' ? '' : selectedLine.txt;
+    textInput.placeholder = 'Enter Meme Text';
 
-  const colorInput = document.getElementById('color')
-  colorInput.value = selectedLine.color
+    const colorInput = document.getElementById('color');
+    if (colorInput) {
+      colorInput.value = selectedLine.color;
+    }
+  } else {
+    console.error("Element 'text-input' not found");
+  }
 }
 
 function onCanvasClick(ev) {
-  const { offsetX, offsetY } = ev
+  const offsetX = ev.offsetX
+  const offsetY = ev.offsetY
   const meme = getMeme()
   const ctx = gElCanvas.getContext('2d')
 
   const clickedLine = meme.lines.find(line => {
-    ctx.font = `${line.size}px ${line.font || 'Impact'}`
+    ctx.font = line.size + 'px ' + (line.font || 'Impact')
     const textWidth = ctx.measureText(line.txt).width
 
     let xPos
@@ -232,30 +203,30 @@ function onCanvasClick(ev) {
   if (clickedLine) {
     meme.selectedLineIdx = meme.lines.indexOf(clickedLine)
     updateTextInput()
-    renderMeme()
+    renderMeme() 
   }
 }
 
 function onSetTextAlign(align) {
   gMeme.lines[gMeme.selectedLineIdx].align = align
-  renderMeme()
+  renderMeme() 
 }
 
 function onSetFontFamily(font) {
   gMeme.lines[gMeme.selectedLineIdx].font = font
-  renderMeme()
+  renderMeme() 
 }
 
 function onMoveLineUp() {
   const line = getMeme().lines[gMeme.selectedLineIdx]
   line.y -= 10
-  renderMeme()
+  renderMeme() 
 }
 
 function onMoveLineDown() {
   const line = getMeme().lines[gMeme.selectedLineIdx]
   line.y += 10
-  renderMeme()
+  renderMeme() 
 }
 
 function onDeleteLine() {
@@ -268,9 +239,43 @@ function onDeleteLine() {
   meme.lines.splice(meme.selectedLineIdx, 1)
   meme.selectedLineIdx = Math.min(meme.selectedLineIdx, meme.lines.length - 1)
   updateTextInput()
-  renderMeme()
+  renderMeme() 
+}
+function onReEditMeme(memeIdx) {
+  const savedMemes = getSavedMemes()
+  const meme = savedMemes[memeIdx]
+
+  setMeme(meme) 
+  showEditor()  
+  renderMeme()  
+}
+function showSaved() {
+  const savedMemes = getSavedMemes()
+  const container = document.getElementById('saved-memes-container')
+  
+  container.innerHTML = '' 
+
+  savedMemes.forEach((meme, idx) => {
+    const memeImg = document.createElement('img')
+    memeImg.src = `img/${meme.selectedImgId}.jpg`
+    memeImg.style.width = '150px'
+    memeImg.onclick = () => onReEditMeme(idx)
+    
+    container.appendChild(memeImg)
+  })
+
+  document.getElementById('saved-memes').style.display = 'block'
+  document.getElementById('gallery').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'none'
+  document.getElementById('about').style.display = 'none'
 }
 
+function showAbout() {
+  document.getElementById('about').style.display = 'block'
+  document.getElementById('gallery').style.display = 'none'
+  document.getElementById('editor-container').style.display = 'none'
+  document.getElementById('saved-memes').style.display = 'none'
+}
 function onSaveMeme() {
   saveMeme()
   alert('Meme saved!')
@@ -302,17 +307,18 @@ function addEmojiToMeme(emoji) {
   gMeme.lines.push(newLine)
   gMeme.selectedLineIdx = gMeme.lines.length - 1
   updateTextInput()
-  renderMeme()
+  renderMeme() 
   document.getElementById('emoji-picker').style.display = 'none'
 }
 
 function onCanvasMouseDown(ev) {
-  const { offsetX, offsetY } = ev
+  const offsetX = ev.offsetX
+  const offsetY = ev.offsetY
   const meme = getMeme()
   const ctx = gElCanvas.getContext('2d')
 
   const clickedLine = meme.lines.find((line, idx) => {
-    ctx.font = `${line.size}px ${line.font || 'Impact'}`
+    ctx.font = line.size + 'px ' + (line.font || 'Impact')
     const textWidth = ctx.measureText(line.txt).width
 
     let xPos
@@ -344,7 +350,7 @@ function onCanvasMouseDown(ev) {
   if (clickedLine) {
     gMeme.selectedLineIdx = meme.lines.indexOf(clickedLine)
     updateTextInput()
-    renderMeme()
+    renderMeme() 
   }
 }
 
@@ -352,12 +358,13 @@ function onCanvasMouseMove(ev) {
   if (!gIsDragging || gDraggedLineIdx === null) return
 
   const meme = getMeme()
-  const { offsetX, offsetY } = ev
+  const offsetX = ev.offsetX
+  const offsetY = ev.offsetY
   const draggedLine = meme.lines[gDraggedLineIdx]
 
   draggedLine.x = offsetX - gDragStartOffset.x
   draggedLine.y = offsetY - gDragStartOffset.y
-  renderMeme()
+  renderMeme() 
 }
 
 function onCanvasMouseUp() {
@@ -367,7 +374,7 @@ function onCanvasMouseUp() {
 }
 
 function onShareFacebook() {
-  const canvasUrl = gElCanvas.toDataURL('image/jpeg');
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canvasUrl)}`;
-  window.open(facebookUrl, '_blank');
+  const canvasUrl = gElCanvas.toDataURL('image/jpeg')
+  const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(canvasUrl)
+  window.open(facebookUrl, '_blank')
 }

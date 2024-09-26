@@ -24,6 +24,12 @@
   <main>
     <section id="gallery">
       <div id="img-gallery"></div>
+      <div class="controls-group">
+        <label for="img-upload" class="upload-label">
+          <i class="fa fa-upload" aria-hidden="true"></i> Or Upload Your Own Image
+        </label>
+        <input type="file" id="img-upload" accept="image/*" onchange="onImgUpload(event)" style="display: none;">
+      </div>
     </section>
 
     <section id="editor-container" style="display: none;">
@@ -142,6 +148,18 @@
       <a href="#" class="delete-all-button" onclick="onDeleteAllSavedMemes()">Delete All Saved Memes</a>
     </section>
   </main>
+  <footer>
+    <div class="footer-separator"></div>
+    <div class="footer-content">
+      <p> 2024 MeMaster by Eran Yosef. All rights reserved.</p>
+      <p>Follow me on: 
+        <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
+      </p>
+    </div>
+  </footer>
 
   <script src="js/gallery-service.js"></script>
   <script src="js/gallery-controller.js"></script>
